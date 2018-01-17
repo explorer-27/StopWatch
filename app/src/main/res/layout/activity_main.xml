@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.ashu.stopwatch.MainActivity">
+
+
+    <Button
+        android:id="@+id/startButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="17dp"
+        android:background="@android:color/transparent"
+        android:onClick="startClicked"
+        android:text="@string/start"
+        android:textColor="@android:color/holo_blue_dark"
+        android:textSize="24sp" />
+
+    <Button
+        android:id="@+id/stopButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/startButton"
+        android:layout_alignBottom="@+id/startButton"
+        android:layout_alignLeft="@+id/resumeButton"
+        android:layout_alignStart="@+id/resumeButton"
+        android:background="@android:color/transparent"
+        android:onClick="stopClicked"
+        android:text="@string/stop"
+        android:textColor="?attr/colorError"
+        android:textSize="24sp"
+        android:visibility="invisible" />
+
+    <Button
+        android:id="@+id/lapButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/startButton"
+        android:layout_alignBottom="@+id/startButton"
+        android:layout_alignLeft="@+id/resetButton"
+        android:layout_alignStart="@+id/resetButton"
+        android:background="@android:color/transparent"
+        android:onClick="lapClicked"
+        android:text="@string/lap"
+        android:textColor="@android:color/holo_blue_dark"
+        android:textSize="24sp"
+        android:visibility="invisible" />
+
+    <Button
+        android:id="@+id/resumeButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/startButton"
+        android:layout_alignBottom="@+id/startButton"
+        android:layout_alignLeft="@+id/totalTimer"
+        android:layout_alignStart="@+id/totalTimer"
+        android:background="@android:color/transparent"
+        android:onClick="resumeClicked"
+        android:text="@string/resume"
+        android:textColor="@android:color/holo_green_light"
+        android:textSize="24sp"
+        android:visibility="invisible" />
+
+    <Button
+        android:id="@+id/resetButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/startButton"
+        android:layout_alignBottom="@+id/startButton"
+        android:layout_alignEnd="@+id/totalTimer"
+        android:layout_alignRight="@+id/totalTimer"
+        android:background="@android:color/transparent"
+        android:onClick="resetClicked"
+        android:text="@string/reset"
+        android:textColor="@android:color/holo_blue_dark"
+        android:visibility="invisible"
+        android:textSize="24sp" />
+
+    <TextView
+        android:id="@+id/totalTimer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="198dp"
+        android:text="@string/Timer"
+        android:textColor="#000000"
+        android:textSize="50sp" />
+
+    <TextView
+        android:id="@+id/lapTimer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/totalTimer"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="14dp"
+        android:text="@string/Timer"
+        android:textSize="25sp"
+        android:visibility="invisible" />
+
+</RelativeLayout>
