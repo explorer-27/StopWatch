@@ -26,16 +26,4 @@ public class Laps {
     public String getLapTimeText() {
         return lapTimeText;
     }
-
-    public void setsNo(int sNo) {
-        this.sNo = sNo;
-    }
-
-    public void setTotalTime(String totalTime) {
-        this.totalTime = totalTime;
-    }
-
-    public void setLapTimeText(String lapTimeText) {
-        this.lapTimeText = lapTimeText;
-    }
 }

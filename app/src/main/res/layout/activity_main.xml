@@ -11,7 +11,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="3"
+        android:layout_weight="3.5"
         android:gravity="center"
         android:orientation="vertical">
 
@@ -25,14 +25,30 @@
             android:textSize="50sp" />
     </LinearLayout>
 
-    <ListView
-        android:id="@+id/lapViews"
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="7"
-        android:smoothScrollbar="false">
+        android:layout_weight="6.5">
 
-    </ListView>
+        <ListView
+            android:id="@+id/lapViews"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="7"
+            android:smoothScrollbar="false"
+            android:stackFromBottom="true">
+
+        </ListView>
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@android:color/transparent"
+            app:srcCompat="@drawable/stopwatch" />
+
+    </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"

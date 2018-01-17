@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -19,6 +20,7 @@ public class MainActivity extends AppCompatActivity {
 
     public static int previousMiliseconds,lapTime,sNo,miliseconds =0;boolean running;
     String totaltime ,lapTimeText="";
+    ImageView img;
 
     public static ListView listView;
     public LapsAdapter mLapsAdapter;
@@ -33,7 +35,7 @@ public class MainActivity extends AppCompatActivity {
         resetButton =findViewById(R.id.resetButton);
         resumeButton =findViewById(R.id.resumeButton);
         lapButton =findViewById(R.id.lapButton);
-
+        img=findViewById(R.id.imageView);
         listView =(ListView) findViewById(R.id.lapViews);
         mLapsData=new ArrayList<Laps>();
         mLapsAdapter=new LapsAdapter(this,mLapsData);
@@ -73,7 +75,7 @@ public class MainActivity extends AppCompatActivity {
         resetButton.setVisibility(View.INVISIBLE);
         resumeButton.setVisibility(View.INVISIBLE);
         startButton.setVisibility(View.VISIBLE);
-
+        img.setVisibility(View.VISIBLE);
         running=false;
         miliseconds =0;previousMiliseconds=0;sNo=0;
         mLapsData=new ArrayList<Laps>();
@@ -84,6 +86,7 @@ public class MainActivity extends AppCompatActivity {
 
 
     public void lapClicked(View view) {
+        img.setVisibility(View.GONE);
         if(previousMiliseconds==0){
             lapTime=miliseconds-previousMiliseconds-100;
             sNo=1;
