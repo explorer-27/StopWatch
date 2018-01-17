@@ -5,15 +5,24 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
 
     Button startButton,stopButton,resetButton,resumeButton,lapButton;
-    TextView totalTimer,lapTimer;
+    TextView totalTimer;
 
-    int seconds=0;boolean running;
+    public static int previousMiliseconds,lapTime,sNo,miliseconds =0;boolean running;
+    String totaltime ,lapTimeText="";
+
+    public static ListView listView;
+    public LapsAdapter mLapsAdapter;
+    public static ArrayList<Laps> mLapsData;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,8 +34,12 @@ public class MainActivity extends AppCompatActivity {
         resumeButton =findViewById(R.id.resumeButton);
         lapButton =findViewById(R.id.lapButton);
 
+        listView =(ListView) findViewById(R.id.lapViews);
+        mLapsData=new ArrayList<Laps>();
+        mLapsAdapter=new LapsAdapter(this,mLapsData);
+
+
         totalTimer=findViewById(R.id.totalTimer);
-        lapTimer=findViewById(R.id.lapTimer);
         runTimer();
     }
 
@@ -62,12 +75,42 @@ public class MainActivity extends AppCompatActivity {
         startButton.setVisibility(View.VISIBLE);
 
         running=false;
-        seconds=0;
+        miliseconds =0;previousMiliseconds=0;sNo=0;
+        mLapsData=new ArrayList<Laps>();
+
+        mLapsAdapter=new LapsAdapter(this,mLapsData);
+        listView.setAdapter(mLapsAdapter);
     }
+
+
     public void lapClicked(View view) {
+        if(previousMiliseconds==0){
+            lapTime=miliseconds-previousMiliseconds-100;
+            sNo=1;
+        }
+        else {
+            lapTime = miliseconds - previousMiliseconds;
+            sNo+=1;
+        }int laphours,lapmins,lapsecs,lapmilisecs;
+        laphours= lapTime /3600000;
+        lapmins=((lapTime %3600000)/60000);
+        lapsecs= ((lapTime %3600000)%60000)/1000;
+        lapmilisecs=(((lapTime %3600000)%60000)%1000)/100;
+
+        previousMiliseconds=miliseconds;
+        if(laphours>0)
+            lapTimeText=String.format("%02d%02d:%02d.%01d",laphours,lapmins,lapsecs,lapmilisecs);
+        else
+            lapTimeText=String.format("%02d:%02d.%01d",lapmins,lapsecs,lapmilisecs);
 
 
-    }
+        mLapsData.add(new Laps(sNo,totaltime,lapTimeText));
+        listView.setAdapter(mLapsAdapter);
+
+
+        }
+
+
     public void runTimer(){
 
         final Handler handler=new Handler();
@@ -75,19 +118,24 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void run() {
                 int hours,mins,secs,milisecs;
-                hours=seconds/3600;
-                mins=(seconds%3600)/60;
-                secs=seconds%60;
-                milisecs=00;
+                hours= miliseconds /3600000;
+                mins=((miliseconds %3600000)/60000);
+                secs= ((miliseconds %3600000)%60000)/1000;
+                milisecs=(((miliseconds %3600000)%60000)%1000)/100;
 
-                String time=String.format("%02d:%02d.%02d",mins,secs,milisecs);
 
-                totalTimer.setText(time);
+                if(hours>0){
+                    totaltime=String.format("%02d:%02d:02d.%01d",hours,mins,secs,milisecs);
+                }
+                else
+                    totaltime=String.format("%02d:%02d.%01d",mins,secs,milisecs);
+
+                totalTimer.setText(totaltime);
                 if(running){
 
-                    seconds++;
+                    miliseconds+=100;
                 }
-                handler.postDelayed(this,1000);
+                handler.postDelayed(this,100);
 
             }
         });
